@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--TITULO-->
+    <title>Contacto</title>
+
+    <!--METADATOS-->
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Hanjie, joc, online, practica, llenguatje, marques, nonogramas, nonograma">
+    <meta name="description" content="Aquesta pagina web esta dedicada a un joc el qual sera hanjie">
+    <meta name=”author” content="Miguel Monteiro Claveri"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Archivos externos-->
+
+    <!--Icono-->
+    <link rel="shortcut icon" type="image/x-icon" href="imagenes/piolin.ico">
+
+</head>
+<body>
+<header>
+    <h1>Hanjie</h1>
+
+    <nav>
+        <ul>
+            <li><a href="#">ES</a></li>
+            <li><a href="#">EN</a></li>
+        </ul>
+    </nav>
+    <!--Navegador principal MENU-->
+    <nav>
+        <ul>
+            <li><a href="index.html">Juego</a></li>
+            <li><a href="ayuda.html">Ayuda</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="configuracion.html">Configuración</a></li>
+            <li><a href="plugin.html">Pagina a plugin extern</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<form action="#" method="post">
+    <!--Formulario para ponernos en contacto-->
+    <fieldset>
+        <legend>Contactanos</legend>
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" placeholder="Pep" required>
+
+        <label for="surname">Apellidos</label>
+        <input type="text" id="surname" name="surname" placeholder="Prats Lozano" required>
+
+        <label for="phone">Número de telefono</label>
+        <select name="prefix" id="prefix">
+            <option value="34">+34</option>
+            <option value="1">+1</option>
+            <option value="54">+54</option>
+            <option value="33">+33</option>
+        </select>
+        <input type="tel" id="phone" name="phone" placeholder="777 999 333" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="pplozano@yahoo.es" required>
+
+        <label for="mensaje">Pequeña descripción</label>
+        <textarea name="mensaje" id="mensaje" cols="20" rows="5" placeholder="90 caracteres max"></textarea>
+
+        <input type="submit" value="Enviar contacto !">
+    </fieldset>
+</form>
+
+<form action="#" method="post">
+
+    <!--Formulario sugerencias-->
+
+    <fieldset>
+        <legend>Sugerencias</legend>
+        <label for="email">Correo electronico</label>
+        <input type="email" id="email-sugerencias" name="email-sugerencias" placeholder="pplozano@yahoo.es" required>
+
+        <label for="sugerencia">Sugerencia</label>
+        <textarea name="sugerencia" id="sugerencia" cols="30" rows="10" placeholder="Introduce brevemente tu sugerencia"
+                  required></textarea>
+        <input type="submit" value="Enviar sugerencia">
+    </fieldset>
+
+</form>
+
+
+<footer>
+    <!--Footer comun en todas las paginas de nuestra web-->
+    <section>
+        <h2>¿Quienes somos?</h2>
+        <p>
+            Somos <span>(insertar nombre de empresa)</span>, dedicada al
+            desarrollo de aplicaciones web, fundada por nuestro CEO y
+            <span>único</span> programador Miguel Monteiro Claveri.
+        </p>
+    </section>
+    <section>
+
+        <!--Nav del footer-->
+        <nav>
+            <ul>
+                <li><a href="index.html">Juego</a></li>
+                <li><a href="ayuda.html">Ayuda</a></li>
+                <li><a href="mapa.html">Mapa</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="configuracion.html">Configuración</a></li>
+                <li><a href="plugin.html">Pagina a plugin extern</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section>
+        <h4>Newsletter</h4>
+        <!--Formulario de subscribirse a nuestro newsletter-->
+        <form action="#" method="post">
+            <label for="mail-footer">Correo electronico</label>
+            <input type="email" placeholder="johndoe@gmail.com" id="mail-footer">
+            <input type="submit" value="Subscribirse !">
+        </form>
+    </section>
+
+    <section>
+        <!--Seccion de contactanos-->
+
+        <h4>Contactanos!</h4>
+        <ul>
+            <li>Tlf +34 971 44 42 34</li>
+            <li>Zip code 08912</li>
+            <li>C/ pio pio Nº 45</li>
+            <li>Palma de Mallorca, España</li>
+        </ul>
+
+        <!-- "Iframe de maps con una supuesta localizacización de nuestra sede" -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3072.6226047175282!2d2.63104111520634!3d39.6357005294636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1297ed44253cb95b%3A0x36a0cf8f83b41ab9!2sParc+BIT%2C+07120%2C+Islas+Baleares!5e0!3m2!1ses!2ses!4v1543523840121"
+                width="200" height="170" style="border:0" allowfullscreen></iframe>
+    </section>
+
+
+</footer>
+
+
+</body>
+</html>
