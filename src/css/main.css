@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 @import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One|Permanent+Marker');
 @import url('https://fonts.googleapis.com/css?family=Abel|Indie+Flower|ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
 /*
     font-family: 'ZCOOL QingKe HuangYou', cursive;
     font-family: 'Indie Flower', cursive;
     font-family: 'Abel', sans-serif;
     font-family: 'Permanent Marker', cursive;
     font-family: 'Pathway Gothic One', sans-serif;
+    font-family: 'Abel', sans-serif;
+
 */
 
 /*
@@ -20,7 +24,10 @@
     box-sizing: border-box;
 }
 
+body{
+    font-family: 'Abel', sans-serif;
 
+}
 
 
 /*  Header  */
@@ -160,6 +167,9 @@ footer section nav ul li{
     flex-basis: 50%;
     height: 55px;
 }
+
+
+
 
 
 /*Alerta*/
