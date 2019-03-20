@@ -14,6 +14,8 @@
     <!--Archivos externos-->
     <!--css comun (header, footer etc)-->
     <link rel="stylesheet" href="css/main.css">
+    <!--CSS DE CONTACTO-->
+    <link rel="stylesheet" href="css/contacto.css">
 
     <!--Icono-->
     <link rel="shortcut icon" type="image/x-icon" href="imagenes/piolin.ico">
@@ -41,55 +43,57 @@
         </ul>
     </nav>
 </header>
+<main>
 
 
-<form action="#" method="post">
-    <!--Formulario para ponernos en contacto-->
-    <fieldset>
-        <legend>Contactanos</legend>
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" placeholder="Pep" required>
+    <form action="#" method="post">
+        <!--Formulario para ponernos en contacto-->
 
-        <label for="surname">Apellidos</label>
-        <input type="text" id="surname" name="surname" placeholder="Prats Lozano" required>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Pep" required>
 
-        <label for="phone">Número de telefono</label>
-        <select name="prefix" id="prefix">
-            <option value="34">+34</option>
-            <option value="1">+1</option>
-            <option value="54">+54</option>
-            <option value="33">+33</option>
-        </select>
-        <input type="tel" id="phone" name="phone" placeholder="777 999 333" required>
+            <label for="surname">Apellidos</label>
+            <input type="text" id="surname" name="surname" placeholder="Prats Lozano" required>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="pplozano@yahoo.es" required>
+            <label for="phone">Número de telefono</label>
 
-        <label for="mensaje">Pequeña descripción</label>
-        <textarea name="mensaje" id="mensaje" cols="20" rows="5" placeholder="90 caracteres max"></textarea>
-
-        <input type="submit" value="Enviar contacto !">
-    </fieldset>
-</form>
-
-<form action="#" method="post">
-
-    <!--Formulario sugerencias-->
-
-    <fieldset>
-        <legend>Sugerencias</legend>
-        <label for="email">Correo electronico</label>
-        <input type="email" id="email-sugerencias" name="email-sugerencias" placeholder="pplozano@yahoo.es" required>
-
-        <label for="sugerencia">Sugerencia</label>
-        <textarea name="sugerencia" id="sugerencia" cols="30" rows="10" placeholder="Introduce brevemente tu sugerencia"
-                  required></textarea>
-        <input type="submit" value="Enviar sugerencia">
-    </fieldset>
-
-</form>
+            <div id="telefono">
+                <select name="prefix" id="prefix">
+                    <option value="34">+34</option>
+                    <option value="1">+1</option>
+                    <option value="54">+54</option>
+                    <option value="33">+33</option>
+                </select>
+                <input type="tel" id="phone" name="phone" placeholder="777 999 333" required>
+            </div>
 
 
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="pplozano@yahoo.es" required>
+
+            <label for="mensaje">Pequeña descripción</label>
+            <textarea name="mensaje" id="mensaje" cols="20" rows="5" placeholder="90 caracteres max"></textarea>
+
+            <input type="submit" value="Enviar contacto !">
+    </form>
+
+    <form action="#" method="post">
+
+        <!--Formulario sugerencias-->
+
+
+            <label for="email">Correo electronico</label>
+            <input type="email" id="email-sugerencias" name="email-sugerencias" placeholder="pplozano@yahoo.es" required>
+
+            <label for="sugerencia">Sugerencia</label>
+            <textarea name="sugerencia" id="sugerencia" cols="30" rows="10" placeholder="Introduce brevemente tu sugerencia"
+                      required></textarea>
+            <input type="submit" value="Enviar sugerencia">
+
+    </form>
+
+
+</main>
 <footer>
     <!--Footer comun en todas las paginas de nuestra web-->
     <section>

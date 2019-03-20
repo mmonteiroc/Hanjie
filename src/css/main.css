@@ -137,6 +137,7 @@ footer{
 
     /*Flex padre*/
     display: flex;
+    flex-wrap: wrap;
 }
 
 footer>*{
@@ -170,6 +171,43 @@ footer section nav ul li{
 
 
 
+
+footer section:nth-child(3) form{
+
+    display: flex;
+    flex-direction: column;
+
+}
+footer section:nth-child(3) form label{
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+footer section:nth-child(3) form input:nth-child(2){
+    height: 60px;
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+footer section:nth-child(3) form input:nth-child(3){
+    margin-top: 20px;
+    height: 50px;
+    font-size: 30px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 20px;
+    box-shadow: #afafaf 2px 2px 2px 2px;
+    transition: box-shadow 1s;
+}
+footer section:nth-child(3) form input:nth-child(3):hover{
+    box-shadow: #9a9a9a 3px 3px 3px 3px;
+    cursor: pointer;
+}
 
 
 /*Alerta*/
