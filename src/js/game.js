@@ -9,19 +9,17 @@ let colorFondo = "#effffd";
 let ajustes = JSON.parse(localStorage.getItem('settings'))
 
 
+
 document.querySelector('#canvasGame').addEventListener('click', event => {
     update(event);
 });
 
 init();
 function init() {
-
-
     setTimeout(function () {
         document.querySelector('.cargaJuego').style = "display:none"
         document.querySelector('#canvasGame').style = "display:block"
     }, 1500);
-
 
     if (localStorage.getItem('settings')) {
         if (ajustes.dificultad === "0") {
@@ -32,11 +30,8 @@ function init() {
 
         colorFondo = ajustes.colorFondo;
     }
-
-
     tablero = new Tablero();
     tablero.init();
-
 }
 
 
@@ -52,6 +47,7 @@ function update(ev) {
     console.log("x: " + x);
     console.log("y: " + y);
     console.log("---------");
+    tablero.checkClick(x, y);
 }
 
 
@@ -66,8 +62,8 @@ function Casilla(x, y, W, H, fila, columna) {
     this.y1 = this.y + this.height;
     this.fila = fila;
     this.columna = columna;
-
-
+    this.fondo = colorFondo;
+    this.pulsada = false;
 
     /*Funciones*/
     this.pintar = function () {
@@ -77,7 +73,7 @@ function Casilla(x, y, W, H, fila, columna) {
             context.fillStyle = "#f9f9f9";
         } else {
             context.strokeStyle = "#0010f3";
-            context.fillStyle = colorFondo;
+            context.fillStyle = this.fondo;
         }
 
 
@@ -89,25 +85,23 @@ function Casilla(x, y, W, H, fila, columna) {
 
 function Tablero() {
 
-
     this.arrayCasillas = [];
-
+    this.sizeBox = 0;
     /*Funciones*/
     this.init = function () {
         var index = 1;
 
-        var widthBox = width / numBoxes;
-        var heigthBox = height / numBoxes;
+        this.sizeBox = width / numBoxes;
+        console.log(this.sizeBox);
         var x;
         var y;
 
 
-
         for (var i = 0; i < numBoxes; i++) {
             for (let j = 0; j < numBoxes; j++) {
-                x = j * widthBox;
-                y = i * heigthBox;
-                this.arrayCasillas.push(new Casilla(x, y, widthBox, heigthBox, i, j));
+                x = j * this.sizeBox;
+                y = i * this.sizeBox;
+                this.arrayCasillas.push(new Casilla(x, y, this.sizeBox, this.sizeBox, i, j));
 
             }
         }
@@ -119,6 +113,27 @@ function Tablero() {
         for (let i = 0; i < this.arrayCasillas.length; i++) {
             this.arrayCasillas[i].pintar();
         }
+    };
+
+
+    /*Comprovar que casilla hemos pulsado*/
+    this.checkClick = function (x, y) {
+        let xCasilla = Math.floor(x / this.sizeBox);
+        let yCasilla = Math.floor((y - 133) / this.sizeBox);
+        let casilla = (yCasilla * numBoxes) + xCasilla;
+        console.log("Has pulsado la casilla :" + yCasilla + " - " + xCasilla);
+        console.log("Casilla: " + casilla);
+
+
+        if (this.arrayCasillas[casilla].pulsada) {
+            console.log("Ya esta pulsada");
+            this.arrayCasillas[casilla].pulsada = false;
+            this.arrayCasillas[casilla].fondo = ajustes.colorFondo;
+        } else {
+            this.arrayCasillas[casilla].pulsada = true;
+            this.arrayCasillas[casilla].fondo = ajustes.colorCasilla;
+        }
+        this.arrayCasillas[casilla].pintar();
     }
 }
 
