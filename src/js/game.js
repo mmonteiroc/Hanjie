@@ -7,7 +7,7 @@ const height = canvas.height;
 let tablero;
 let colorFondo = "#effffd";
 let ajustes = JSON.parse(localStorage.getItem('settings'))
-
+let colorCasilla = "#f30100";
 
 
 document.querySelector('#canvasGame').addEventListener('click', event => {
@@ -29,6 +29,7 @@ function init() {
         }
 
         colorFondo = ajustes.colorFondo;
+        colorCasilla = ajustes.colorCasilla;
     }
     tablero = new Tablero();
     tablero.init();
@@ -116,6 +117,7 @@ function Tablero() {
     };
 
 
+
     /*Comprovar que casilla hemos pulsado*/
     this.checkClick = function (x, y) {
         let xCasilla = Math.floor(x / this.sizeBox);
@@ -128,10 +130,10 @@ function Tablero() {
         if (this.arrayCasillas[casilla].pulsada) {
             console.log("Ya esta pulsada");
             this.arrayCasillas[casilla].pulsada = false;
-            this.arrayCasillas[casilla].fondo = ajustes.colorFondo;
+            this.arrayCasillas[casilla].fondo = colorFondo;
         } else {
             this.arrayCasillas[casilla].pulsada = true;
-            this.arrayCasillas[casilla].fondo = ajustes.colorCasilla;
+            this.arrayCasillas[casilla].fondo = colorCasilla;
         }
         this.arrayCasillas[casilla].pintar();
     }
