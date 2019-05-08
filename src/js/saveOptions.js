@@ -1,12 +1,12 @@
 const ajustesOriginales = {
-    dificultad: "easy",
+    dificultad: 0,
     colorCasilla: "#f30100",
     colorCruces: "#3858f3",
     sonido: true,
     tema: "light"
 };
 
-let ajustes = {};
+var ajustes = {};
 
 
 
@@ -18,10 +18,10 @@ document.querySelector('#resetSettings').addEventListener('click', function () {
     resetSettings();
 });
 
-init();
+initAjustes();
 
 
-function init() {
+function initAjustes() {
 
     comprovarAjustes();
     asignarAjustes();
@@ -39,7 +39,8 @@ function comprovarAjustes() {
 
 function resetSettings() {
     ajustes = ajustesOriginales;
-    localStorage.removeItem('settings');
+    var aj = JSON.stringify(ajustes);
+    localStorage.setItem('settings', aj);
     asignarAjustes();
 }
 
