@@ -14,11 +14,9 @@
     <!--Archivos externos-->
     <!--css comun (header, footer etc)-->
     <link rel="stylesheet" href="css/main.css">
-    <!--CSS DE CONTACTO-->
-    <link rel="stylesheet" href="css/contacto.css">
 
     <!--Icono-->
-    <link rel="shortcut icon" type="image/x-icon" href="imagenes/piolin.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/piolin.ico">
 
 </head>
 <body>
@@ -43,11 +41,12 @@
         </ul>
     </nav>
 </header>
-<main>
+<main id="mainContact">
 
 
     <form action="#" method="post">
         <!--Formulario para ponernos en contacto-->
+        <h4>Contactanos !!</h4>
 
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" placeholder="Pep" required>
@@ -80,14 +79,20 @@
     <form action="#" method="post">
 
         <!--Formulario sugerencias-->
+        <h4>Dinos tu sugerencia :P</h4>
 
-
+        <div class="smallSug">
             <label for="email">Correo electronico</label>
-            <input type="email" id="email-sugerencias" name="email-sugerencias" placeholder="pplozano@yahoo.es" required>
+            <input type="email" id="email-sugerencias" name="email-sugerencias" placeholder="pplozano@yahoo.es"
+                   required>
+        </div>
 
+        <div class="smallSug">
             <label for="sugerencia">Sugerencia</label>
-            <textarea name="sugerencia" id="sugerencia" cols="30" rows="10" placeholder="Introduce brevemente tu sugerencia"
+            <textarea name="sugerencia" id="sugerencia" cols="30" rows="10"
+                      placeholder="Introduce brevemente tu sugerencia"
                       required></textarea>
+        </div>
             <input type="submit" value="Enviar sugerencia">
 
     </form>
@@ -108,6 +113,7 @@
 
         <!--Nav del footer-->
         <nav>
+            <h2>Menu</h2>
             <ul>
                 <li><a href="index.html">Juego</a></li>
 

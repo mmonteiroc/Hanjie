@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One|Permanent+Marker');
 @import url('https://fonts.googleapis.com/css?family=Abel|Indie+Flower|ZCOOL+QingKe+HuangYou');
 @import url('https://fonts.googleapis.com/css?family=Abel');
+@import url(https://fonts.googleapis.com/css?family=Six+Caps);
+@import url('https://fonts.googleapis.com/css?family=Iceberg');
+
 
 /*
     font-family: 'ZCOOL QingKe HuangYou', cursive;
@@ -229,4 +232,218 @@ footer section:nth-child(3) form input:nth-child(3):hover{
     right: 15px;
     top: 13px;
 }
+
+
+/*ANIMACION DE CARGA DEL JUEGO*/
+
+/*
+Animacion encontrada por interner en esta pagina web:
+https://codepen.io/Rplus/pen/lEDBj
+Modificaca a mi gusto
+*/
+div.cargaJuego {
+    height: 400px;
+}
+
+.bb, .bb::before, .bb::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
+
+}
+
+.bb {
+    z-index: 15;
+
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    color: #c7ca7c;
+    box-shadow: inset 0 0 0 3px rgba(193, 202, 138, 0.5);
+}
+
+.bb::before, .bb::after {
+    content: '';
+    z-index: 15;
+    margin: -5%;
+    box-shadow: inset 0 0 0 3px;
+    animation: clipMe 8s linear infinite;
+}
+
+.bb::before {
+    z-index: 15;
+
+    animation-delay: -4s;
+}
+
+.bb:hover::after, .bb:hover::before {
+    z-index: 15;
+
+    background-color: rgba(239, 115, 255, 0.11);
+}
+
+@keyframes clipMe {
+    0%, 100% {
+        clip: rect(0px, 220px, 2px, 0px);
+        z-index: 15;
+    }
+    25% {
+        clip: rect(0px, 2px, 220px, 0px);
+        z-index: 15;
+
+    }
+    50% {
+        clip: rect(218px, 220px, 220px, 0px);
+        z-index: 15;
+
+    }
+    75% {
+        clip: rect(0px, 220px, 220px, 218px);
+        z-index: 15;
+
+    }
+}
+
+@keyframes aniTexto {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.4);
+    }
+
+}
+
+
+.bb h3 {
+    font-family: 'Iceberg', cursive;
+    animation: aniTexto 1s infinite linear alternate;
+    margin-top: 40%;
+    margin-bottom: 40%;
+    color: black;
+    font-size: 2.2em;
+}
+
+
+/*MAPA*/
+
+#map {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+
+/*CONFIG*/
+
+
+#settings {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+    background-color: lightgray;
+    border: black solid 1px;
+    border-radius: 20px;
+}
+
+#settings form {
+    /*Flex padre*/
+    display: flex;
+    flex-direction: column;
+
+    padding: 15px;
+}
+
+#settings form > input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+/*CONTACTO*/
+
+
+main#mainContact form {
+
+    background-color: #fbfbfb;
+
+    border-radius: 5px;
+    border: #191b90 solid 1px;
+    text-align: center;
+    padding: 15px;
+    font-size: 25px;
+
+    /*FLEX HIJO*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    /*FLEX HIJO*/
+    flex-basis: 30%;
+}
+
+main#mainContact {
+    /*FLEX PADRE*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+main#mainContact form input, main#mainContact form textarea, main#mainContact form select {
+    font-size: 20px;
+    height: 60px;
+}
+
+main#mainContact form textarea {
+    height: 130px;
+}
+
+#telefono input {
+    width: 70%;
+}
+
+#telefono select {
+    width: 11%;
+}
+
+.smallSug {
+    /*flex padre*/
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*HELP*/
+
+
+main#mainHelp {
+
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 25px;
+}
+
+main#mainHelp section:nth-child(2) {
+    /*FLEX PAPA*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#mainHelp h3 {
+    text-align: center;
+    font-size: 50px;
+
+}
+
+
 

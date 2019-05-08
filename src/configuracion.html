@@ -14,14 +14,15 @@
     <!--Archivos externos-->
     <!--css comun (header, footer etc)-->
     <link rel="stylesheet" href="css/main.css">
-
     <!--Icono-->
-    <link rel="shortcut icon" type="image/x-icon" href="imagenes/piolin.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/piolin.ico">
+
 
 </head>
 <body>
 <header>
     <h1>Hanjie</h1>
+
 
     <nav>
         <ul>
@@ -44,7 +45,7 @@
 
 
 <main>
-    <section>
+    <section id="settings">
         <h2>Ajustes</h2>
         <form action="#" method="get">
             <!--Ajustes del juego-->
@@ -65,17 +66,21 @@
 
 
             <label for="sound-on">Sonido</label>
-            <input type="radio" name="sonido" id="sound-on" value="on">Activar sonido
-            <input type="radio" name="sonido" value="off"> Desactivar sonido
+            <section class="radio">
+                <input type="radio" name="sonido" id="sound-on" value="on">Activar sonido
+                <input type="radio" name="sonido" value="off"> Desactivar sonido
+            </section>
 
 
             <label for="theme-light">Tema</label>
-            <input type="radio" name="theme" id="theme-light" value="light"> Tema claro
-            <input type="radio" name="theme" value="dark"> Tema oscuro
+            <section class="radio">
+                <input type="radio" name="theme" id="theme-light" value="light"> Tema claro
+                <input type="radio" name="theme" value="dark"> Tema oscuro
 
+            </section>
 
-            <input type="submit" value="Guardar cambios">
-            <button>Ajustes predeterminados</button>
+            <button id="guardarAjustes">Guardar ajustes</button>
+            <button id="resetSettings">Ajustes predeterminados</button>
         </form>
     </section>
 </main>
@@ -95,6 +100,7 @@
 
         <!--Nav del footer-->
         <nav>
+            <h2>Menu</h2>
             <ul>
                 <li><a href="index.html">Juego</a></li>
                 <li><a href="ayuda.html">Ayuda</a></li>
@@ -132,6 +138,11 @@
 
 
 </footer>
+
+
+<!-- JavaScript -->
+<script src="js/saveOptions.js"></script>
+
 
 </body>
 </html>

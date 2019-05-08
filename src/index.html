@@ -12,18 +12,20 @@
     <meta name=”author” content="Miguel Monteiro Claveri"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--Archivos externos (css, javascript, imagenes, media etc...)-->
+    <!--Archivos externos (css, javascript, assets, media etc...)-->
     <!--css comun (header, footer etc)-->
     <link rel="stylesheet" href="css/main.css">
 
     <!--Icono-->
-    <link rel="shortcut icon" type="image/x-icon" href="imagenes/piolin.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/piolin.ico">
 
 </head>
 <body>
 
 <header>
+
     <h1>Hanjie</h1>
+
 
     <nav>
         <ul>
@@ -46,6 +48,12 @@
 </header>
 
 <main>
+
+    <div class="cargaJuego">
+        <div class="bb">
+            <h3>Cargando</h3>
+        </div>
+    </div>
 
     <!--Aqui ira el canvas de nuestro juego principal-->
     <canvas>
@@ -109,12 +117,13 @@
 <!--pop up ayuda-->
 <section id="advice">
 
-    <img src="imagenes/close.png" alt="boton cerrar pop up">
+    <img src="assets/close.png" alt="boton cerrar pop up">
     ¿Tienes alguna duda?
     No dudes en contactarme!!
     <a href="mailto:miguelmonteiroclaveri@gmail.com">Enviar un EMAIL</a>
 
 </section>
+
 
 </body>
 </html>
