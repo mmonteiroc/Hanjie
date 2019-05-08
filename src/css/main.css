@@ -233,6 +233,10 @@ footer section:nth-child(3) form input:nth-child(3):hover{
     top: 13px;
 }
 
+#advice img:hover {
+    cursor: pointer;
+}
+
 
 /*ANIMACION DE CARGA DEL JUEGO*/
 

@@ -2,6 +2,7 @@ const ajustesOriginales = {
     dificultad: 0,
     colorCasilla: "#f30100",
     colorCruces: "#3858f3",
+    colorFondo: "#effffd",
     sonido: true,
 
 };
@@ -50,10 +51,8 @@ function save() {
         dificultad: document.querySelector('#dificultad').value,
         colorCasilla: document.querySelector('#color-casilla').value,
         colorCruces: document.querySelector('#color-creu').value,
-        /*Todo configurar sonido */
+        colorFondo: document.querySelector('#color-fondo').value,
         sonido: false,
-
-
     };
     if (document.querySelector('#sound-on').checked) {
         ajustesGuardar.sonido = true;
@@ -77,7 +76,7 @@ function asignarAjustes() {
 
     document.querySelector('#color-casilla').value = ajustes.colorCasilla;
     document.querySelector('#color-creu').value = ajustes.colorCruces;
-
+    document.querySelector('#color-fondo').value = ajustes.colorFondo;
     if (ajustes.sonido) {
         document.querySelector('#sound-on').checked = true;
         document.querySelector('#sound-off').checked = false;

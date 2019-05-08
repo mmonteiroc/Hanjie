@@ -5,8 +5,7 @@ let numBoxes = 7;
 const width = canvas.width;
 const height = canvas.height;
 let tablero;
-
-
+let colorFondo = "#effffd";
 let ajustes = JSON.parse(localStorage.getItem('settings'))
 
 
@@ -26,10 +25,12 @@ function init() {
 
     if (localStorage.getItem('settings')) {
         if (ajustes.dificultad === "0") {
-            numBoxes = 5
+            numBoxes = 8
         } else if (ajustes.dificultad === "1") {
             numBoxes = 11
         }
+
+        colorFondo = ajustes.colorFondo;
     }
 
 
@@ -76,7 +77,7 @@ function Casilla(x, y, W, H, fila, columna) {
             context.fillStyle = "#f9f9f9";
         } else {
             context.strokeStyle = "#0010f3";
-            context.fillStyle = "#effffd";
+            context.fillStyle = colorFondo;
         }
 
 
