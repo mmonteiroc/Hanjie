@@ -21,11 +21,15 @@ function init() {
         document.querySelector('#canvasGame').style = "display:block"
     }, 1500);
 
-    if (ajustes.dificultad === "0") {
-        numBoxes = 5
-    } else if (ajustes.dificultad === "1") {
-        numBoxes = 9
+
+    if (localStorage.getItem('settings')) {
+        if (ajustes.dificultad === "0") {
+            numBoxes = 5
+        } else if (ajustes.dificultad === "1") {
+            numBoxes = 9
+        }
     }
+
 
     tablero = new Tablero();
     tablero.init();
