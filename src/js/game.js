@@ -1,10 +1,12 @@
 const canvas = document.querySelector('#canvasGame');
 const context = canvas.getContext('2d');
 const bounding = canvas.getBoundingClientRect();
-let numBoxes = 2;
+let numBoxes = 7;
 const width = canvas.width;
 const height = canvas.height;
 let tablero;
+
+
 let ajustes = JSON.parse(localStorage.getItem('settings'))
 
 
@@ -12,7 +14,7 @@ document.querySelector('#canvasGame').addEventListener('click', event => {
     update(event);
 });
 
-
+init();
 function init() {
 
 
@@ -26,7 +28,7 @@ function init() {
         if (ajustes.dificultad === "0") {
             numBoxes = 5
         } else if (ajustes.dificultad === "1") {
-            numBoxes = 9
+            numBoxes = 11
         }
     }
 
@@ -36,7 +38,7 @@ function init() {
 
 }
 
-init();
+
 
 
 function update(ev) {
@@ -52,22 +54,34 @@ function update(ev) {
 }
 
 
-function Casilla(x, y, x1, y1) {
+function Casilla(x, y, W, H, fila, columna) {
 
     // atributos
     this.x = x;
-    this.x1 = x1;
     this.y = y;
-    this.y1 = y1;
-    this.width = this.x1 - this.x;
-    this.height = this.y1 - this.y;
+    this.width = W;
+    this.height = H;
+    this.x1 = this.x + this.width;
+    this.y1 = this.y + this.height;
+    this.fila = fila;
+    this.columna = columna;
+
 
 
     /*Funciones*/
     this.pintar = function () {
-        context.fillStyle = "#000000";
-        context.strokeRect(this.x, this.y, this.x1, this.y1);
 
+        if (this.fila === 0 || this.columna === 0) {
+            context.strokeStyle = "#343a36";
+            context.fillStyle = "#f9f9f9";
+        } else {
+            context.strokeStyle = "#0010f3";
+            context.fillStyle = "#effffd";
+        }
+
+
+        context.fillRect(this.x, this.y, this.width, this.height);
+        context.strokeRect(this.x, this.y, this.width, this.height);
     };
 }
 
@@ -83,12 +97,17 @@ function Tablero() {
 
         var widthBox = width / numBoxes;
         var heigthBox = height / numBoxes;
+        var x;
+        var y;
+
+
 
         for (var i = 0; i < numBoxes; i++) {
             for (let j = 0; j < numBoxes; j++) {
+                x = j * widthBox;
+                y = i * heigthBox;
+                this.arrayCasillas.push(new Casilla(x, y, widthBox, heigthBox, i, j));
 
-
-                this.arrayCasillas.push(new Casilla(j * widthBox, i * heigthBox, j * widthBox + widthBox, i * heigthBox + heigthBox));
             }
         }
         this.pintar();

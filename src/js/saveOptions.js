@@ -3,7 +3,7 @@ const ajustesOriginales = {
     colorCasilla: "#f30100",
     colorCruces: "#3858f3",
     sonido: true,
-    tema: "light"
+
 };
 
 var ajustes = {};
@@ -50,11 +50,14 @@ function save() {
         dificultad: document.querySelector('#dificultad').value,
         colorCasilla: document.querySelector('#color-casilla').value,
         colorCruces: document.querySelector('#color-creu').value,
-        /*Todo configurar sonido / tema*/
+        /*Todo configurar sonido */
         sonido: false,
-        tema: "light"
-    };
 
+
+    };
+    if (document.querySelector('#sound-on').checked) {
+        ajustesGuardar.sonido = true;
+    }
     var aguardar = JSON.stringify(ajustesGuardar);
     localStorage.setItem('settings', aguardar);
 }
@@ -81,13 +84,5 @@ function asignarAjustes() {
     } else {
         document.querySelector('#sound-on').checked = false;
         document.querySelector('#sound-off').checked = true;
-    }
-
-    if (ajustes.tema === 'light') {
-        document.querySelector('#theme-light').checked = true;
-        document.querySelector('#theme-dark').checked = false;
-    } else {
-        document.querySelector('#theme-light').checked = false;
-        document.querySelector('#theme-dark').checked = true;
     }
 }
