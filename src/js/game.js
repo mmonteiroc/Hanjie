@@ -6,8 +6,11 @@ const width = canvas.width;
 const height = canvas.height;
 let tablero;
 let colorFondo = "#effffd";
-let ajustes = JSON.parse(localStorage.getItem('settings'))
+let ajustes = JSON.parse(localStorage.getItem('settings'));
 let colorCasilla = "#f30100";
+let indexGlobalGame;
+let arrayDibujos7 = [11, 12, 13, 19, 20, 21, 28, 36, 44, 50, 51, 52, 53, 54, 58, 59, 61, 61]; // 18 length
+let arrayDibujosSeleccionado = arrayDibujos7;
 
 
 document.querySelector('#canvasGame').addEventListener('click', event => {
@@ -22,6 +25,8 @@ function init() {
         bounding = canvas.getBoundingClientRect()
     }, 1500);
 
+    document.querySelector('#victoria').style = "display:none";
+
     if (localStorage.getItem('settings')) {
         if (ajustes.dificultad === "0") {
             numBoxes = 8
@@ -32,6 +37,7 @@ function init() {
         colorFondo = ajustes.colorFondo;
         colorCasilla = ajustes.colorCasilla;
     }
+    indexGlobalGame = 0;
     tablero = new Tablero();
     tablero.init();
 }
@@ -51,7 +57,7 @@ function update(ev) {
 }
 
 
-function Casilla(x, y, W, H, fila, columna) {
+function Casilla(x, y, W, H, fila, columna, noPulsable) {
 
     // atributos
     this.x = x;
@@ -64,6 +70,7 @@ function Casilla(x, y, W, H, fila, columna) {
     this.columna = columna;
     this.fondo = colorFondo;
     this.pulsada = false;
+    this.noPulsabe = noPulsable;
 
     /*Funciones*/
     this.pintar = function () {
@@ -75,8 +82,6 @@ function Casilla(x, y, W, H, fila, columna) {
             context.strokeStyle = "#0010f3";
             context.fillStyle = this.fondo;
         }
-
-
         context.fillRect(this.x, this.y, this.width, this.height);
         context.strokeRect(this.x, this.y, this.width, this.height);
     };
@@ -101,7 +106,11 @@ function Tablero() {
             for (let j = 0; j < numBoxes; j++) {
                 x = j * this.sizeBox;
                 y = i * this.sizeBox;
-                this.arrayCasillas.push(new Casilla(x, y, this.sizeBox, this.sizeBox, i, j));
+                let noPulsable = false;
+                if (i === 0 || j === 0) {
+                    noPulsable = true;
+                }
+                this.arrayCasillas.push(new Casilla(x, y, this.sizeBox, this.sizeBox, i, j, noPulsable));
 
             }
         }
@@ -120,23 +129,53 @@ function Tablero() {
     /*Comprovar que casilla hemos pulsado*/
     this.checkClick = function (x, y) {
         let xCasilla = Math.floor(x / this.sizeBox);
-        let yCasilla = Math.floor((y) / this.sizeBox);
+        let yCasilla = Math.floor(y / this.sizeBox);
         let casilla = (yCasilla * numBoxes) + xCasilla;
         console.log("Has pulsado la casilla :" + yCasilla + " - " + xCasilla);
         console.log("Casilla: " + casilla);
 
+        if (!this.arrayCasillas[casilla].noPulsabe) {
+            if (this.arrayCasillas[casilla].pulsada) {
+                console.log("Ya esta pulsada");
+                this.arrayCasillas[casilla].pulsada = false;
+                this.arrayCasillas[casilla].fondo = colorFondo;
+                indexGlobalGame--;
+            } else {
+                this.arrayCasillas[casilla].pulsada = true;
+                this.arrayCasillas[casilla].fondo = colorCasilla;
+                indexGlobalGame++;
+            }
+            this.arrayCasillas[casilla].pintar();
 
-        if (this.arrayCasillas[casilla].pulsada) {
-            console.log("Ya esta pulsada");
-            this.arrayCasillas[casilla].pulsada = false;
-            this.arrayCasillas[casilla].fondo = colorFondo;
-        } else {
-            this.arrayCasillas[casilla].pulsada = true;
-            this.arrayCasillas[casilla].fondo = colorCasilla;
+
+            if (arrayDibujosSeleccionado.length === indexGlobalGame) {
+                checkEndGame();
+            }
         }
-        this.arrayCasillas[casilla].pintar();
+
     }
 }
+
+function restart() {
+    init();
+}
+
+function checkEndGame() {
+    let posicion;
+    for (let i = 0; i < arrayDibujosSeleccionado.length; i++) {
+        posicion = arrayDibujosSeleccionado[i];
+
+        if (tablero.arrayCasillas[posicion].pulsada === false) {
+            document.querySelector('#victoria').style = "display:none";
+            return;
+        }
+    }
+    document.querySelector('#victoria').style = "display:inline";
+    console.log("Has ganado");
+}
+
+
+
 
 
 
