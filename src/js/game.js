@@ -37,8 +37,6 @@ function init() {
 }
 
 
-
-
 function update(ev) {
     var x = ev.clientX - bounding.left;
     var y = ev.clientY - bounding.top;
