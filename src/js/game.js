@@ -1,6 +1,6 @@
 const canvas = document.querySelector('#canvasGame');
 const context = canvas.getContext('2d');
-const bounding = canvas.getBoundingClientRect();
+let bounding;
 let numBoxes = 7;
 const width = canvas.width;
 const height = canvas.height;
@@ -17,8 +17,9 @@ document.querySelector('#canvasGame').addEventListener('click', event => {
 init();
 function init() {
     setTimeout(function () {
-        document.querySelector('.cargaJuego').style = "display:none"
-        document.querySelector('#canvasGame').style = "display:block"
+        document.querySelector('.cargaJuego').style = "display:none";
+        document.querySelector('#canvasGame').style = "display:block";
+        bounding = canvas.getBoundingClientRect()
     }, 1500);
 
     if (localStorage.getItem('settings')) {
@@ -68,7 +69,7 @@ function Casilla(x, y, W, H, fila, columna) {
 
     /*Funciones*/
     this.pintar = function () {
-
+        context.clearRect(this.x, this.y, this.width, this.height);
         if (this.fila === 0 || this.columna === 0) {
             context.strokeStyle = "#343a36";
             context.fillStyle = "#f9f9f9";
@@ -121,7 +122,7 @@ function Tablero() {
     /*Comprovar que casilla hemos pulsado*/
     this.checkClick = function (x, y) {
         let xCasilla = Math.floor(x / this.sizeBox);
-        let yCasilla = Math.floor((y - 133) / this.sizeBox);
+        let yCasilla = Math.floor((y) / this.sizeBox);
         let casilla = (yCasilla * numBoxes) + xCasilla;
         console.log("Has pulsado la casilla :" + yCasilla + " - " + xCasilla);
         console.log("Casilla: " + casilla);
