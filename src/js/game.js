@@ -17,6 +17,7 @@ document.querySelector('#canvasGame').addEventListener('click', event => {
     update(event);
 });
 
+
 init();
 function init() {
     setTimeout(function () {
