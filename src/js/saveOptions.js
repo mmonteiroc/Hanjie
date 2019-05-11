@@ -1,8 +1,8 @@
 const ajustesOriginales = {
     dificultad: 0,
-    colorCasilla: "#f30100",
+    colorCasilla: "#ffb3ac",
     colorCruces: "#3858f3",
-    colorFondo: "#effffd",
+    colorFondo: "#ceffdc",
     sonido: true,
 
 };
@@ -43,6 +43,7 @@ function resetSettings() {
     var aj = JSON.stringify(ajustes);
     localStorage.setItem('settings', aj);
     asignarAjustes();
+    popUp();
 }
 
 
@@ -59,6 +60,7 @@ function save() {
     }
     var aguardar = JSON.stringify(ajustesGuardar);
     localStorage.setItem('settings', aguardar);
+    popUp();
 }
 
 
@@ -84,4 +86,21 @@ function asignarAjustes() {
         document.querySelector('#sound-on').checked = false;
         document.querySelector('#sound-off').checked = true;
     }
+}
+
+
+function popUp() {
+    var pop = document.querySelector('#popUpSaved');
+
+    pop.style.display = "block";
+    let i = 0;
+    let int = setInterval(function () {
+        pop.style.opacity = "" + i;
+        i += 0.01;
+        if (i > 1) {
+            clearInterval(int);
+        }
+    }, 40);
+
+
 }

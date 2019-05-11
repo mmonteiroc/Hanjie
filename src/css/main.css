@@ -459,4 +459,25 @@ main#mainHelp section:nth-child(2) {
 }
 
 
+#canviarNivel {
+    display: none;
+    font-size: 21px;
+    width: 750px;
+    margin-bottom: 20px;
+    margin-left: 30%;
+}
 
+
+#popUpSaved {
+    display: none; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    right: 20px;
+    top: 15vh;
+    font-size: 25px;
+    opacity: 0;
+    padding: 10px;
+    width: 20vw; /* Full width */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(191, 191, 191, 0.4); /* Black w/ opacity */
+    transition: display 2s;
+}

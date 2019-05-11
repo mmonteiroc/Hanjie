@@ -5,27 +5,35 @@ let numBoxes = 8;
 const width = canvas.width;
 const height = canvas.height;
 let tablero;
-let colorFondo = "#effffd";
+let colorFondo = "#ceffdc";
 let ajustes = JSON.parse(localStorage.getItem('settings'));
-let colorCasilla = "#f30100";
+let colorCasilla = "#ffb3ac";
 let indexGlobalGame;
 let arrayDibujosSeleccionado;
 let sizeBoxGlobal;
+let victoria;
 
 document.querySelector('#canvasGame').addEventListener('click', event => {
     update(event);
 });
-
+window.addEventListener("scroll", function () {
+    bounding = canvas.getBoundingClientRect()
+});
 
 init();
 
 function restart() {
     init2();
+    document.querySelector('#canviarNivel').style = "display:block";
+
 }
 function init() {
     setTimeout(function () {
         document.querySelector('.cargaJuego').style = "display:none";
         document.querySelector('#canvasGame').style = "display:block";
+        document.querySelector('#canviarNivel').style = "display:block";
+        document.querySelector('#canvasGame').style.marginLeft = "30%";
+
         bounding = canvas.getBoundingClientRect()
     }, 1500);
 
@@ -37,32 +45,37 @@ function init2() {
     if (localStorage.getItem('settings')) {
         if (ajustes.dificultad === "0") {
             numBoxes = 8;
-            let numLevels = arrayDibujos77.length;
-            arrayDibujosSeleccionado = arrayDibujos77[0];
-
         } else if (ajustes.dificultad === "1") {
-
-
-            /*
-            * Peta al hacer un random de los niveles a elegir
-            *
-            * */
             numBoxes = 11;
-            let numLevels = arrayDibujos77.length;
-            arrayDibujosSeleccionado = arrayDibujos10[Math.floor((Math.random() * numLevels - 1))];
+        } else if (ajustes.dificultad === "2") {
+            numBoxes = 16;
         }
 
         colorFondo = ajustes.colorFondo;
         colorCasilla = ajustes.colorCasilla;
     } else {
         numBoxes = 8;
-        let numLevels = arrayDibujos77.length;
-        arrayDibujosSeleccionado = arrayDibujos77[0];
     }
     indexGlobalGame = 0;
+    victoria = false;
+    chooseLevel();
     tablero = new Tablero();
     tablero.init();
 }
+
+function chooseLevel() {
+    let levelSize = 0;
+    if (numBoxes === 8) {
+        levelSize = arrayDibujos7.length;
+        arrayDibujosSeleccionado = arrayDibujos7[Math.floor(Math.random() * levelSize)]
+    } else if (numBoxes === 11) {
+        levelSize = arrayDibujos10.length;
+        arrayDibujosSeleccionado = arrayDibujos10[Math.floor(Math.random() * levelSize)]
+    } else if (numBoxes === 16) {
+        arrayDibujosSeleccionado = arrayDibujos15[0]
+    }
+}
+
 
 
 function update(ev) {
@@ -71,11 +84,13 @@ function update(ev) {
 
     // ... x,y are the click coordinates relative to the
     // canvas itself
-    console.log("---------");
-    console.log("x: " + x);
-    console.log("y: " + y);
-    console.log("---------");
-    tablero.checkClick(x, y);
+    /*   console.log("---------");
+       console.log("x: " + x);
+       console.log("y: " + y);
+       console.log("---------");*/
+    if (!victoria) {
+        tablero.checkClick(x, y);
+    }
 }
 
 
@@ -129,8 +144,8 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
                 yCasilla = i;
                 let casilla = (yCasilla * numBoxes) + xCasilla;
 
-                console.log("xCasilla: " + xCasilla);
-                console.log("yCasilla: " + yCasilla);
+                //console.log("xCasilla: " + xCasilla);
+                //console.log("yCasilla: " + yCasilla);
                 console.log("Casilla resultante: " + casilla)
 
                 if (arrayDibujosSeleccionado.indexOf(casilla) >= 0) {
@@ -154,8 +169,8 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
                 xCasilla = i;
                 let casilla = (yCasilla * numBoxes) + xCasilla;
 
-                console.log("xCasilla: " + xCasilla);
-                console.log("yCasilla: " + yCasilla);
+                //console.log("xCasilla: " + xCasilla);
+                //console.log("yCasilla: " + yCasilla);
                 console.log("Casilla resultante: " + casilla)
 
                 if (arrayDibujosSeleccionado.indexOf(casilla) >= 0) {
@@ -182,7 +197,7 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
         context.fillStyle = "#000000";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.font = (this.width / 3) + "px Arial";
+        context.font = (this.width / 4) + "px Arial";
         let xx = this.x + (this.width / 2);
         let yy = this.y + (this.height / 2);
 
@@ -273,7 +288,9 @@ function checkEndGame() {
         }
     }
     document.querySelector('#victoria').style = "display:inline";
+    document.querySelector('#canviarNivel').style.display = "none";
     console.log("Has ganado");
+    victoria = true;
 }
 
 
