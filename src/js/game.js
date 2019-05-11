@@ -13,10 +13,22 @@ let arrayDibujosSeleccionado;
 let sizeBoxGlobal;
 let victoria;
 
-document.querySelector('#canvasGame').addEventListener('click', event => {
+canvas.addEventListener('click', event => {
     update(event);
 });
+canvas.addEventListener('contextmenu', event => {
+    event.preventDefault();
+    updateRight(event)
+});
+
+
+/*
+* Aqui arreglamos el que podamos hacer scroll en el juego y hacer resize de la pantalla :D
+* */
 window.addEventListener("scroll", function () {
+    bounding = canvas.getBoundingClientRect()
+});
+window.addEventListener("resize", function () {
     bounding = canvas.getBoundingClientRect()
 });
 
@@ -27,6 +39,7 @@ function restart() {
     document.querySelector('#canviarNivel').style = "display:block";
 
 }
+
 function init() {
     setTimeout(function () {
         document.querySelector('.cargaJuego').style = "display:none";
@@ -77,10 +90,9 @@ function chooseLevel() {
 }
 
 
-
 function update(ev) {
-    var x = ev.clientX - bounding.left;
-    var y = ev.clientY - bounding.top;
+    let x = ev.clientX - bounding.left;
+    let y = ev.clientY - bounding.top;
 
     // ... x,y are the click coordinates relative to the
     // canvas itself
@@ -92,6 +104,17 @@ function update(ev) {
         tablero.checkClick(x, y);
     }
 }
+
+function updateRight(ev) {
+    let x = ev.clientX - bounding.left;
+    let y = ev.clientY - bounding.top;
+    if (!victoria) {
+        tablero.checkRightClick(x, y);
+    }
+}
+
+
+
 
 
 function Casilla(x, y, W, H, fila, columna, noPulsable) {
@@ -108,8 +131,7 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
     this.fondo = colorFondo;
     this.pulsada = false;
     this.noPulsabe = noPulsable;
-    this.texto = "";
-
+    this.exis = false;
 
     /*Funciones*/
     this.pintar = function () {
@@ -133,7 +155,7 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
 
     this.ponerNumeros = function () {
         //numBoxes;
-        var string = "";
+        let string = "";
         let primeraEncontrada = false;
         let index = 0;
         if (this.y === 0) {
@@ -204,10 +226,26 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
         context.fillText(texto, xx, yy);
     };
 
+    this.drawCross = function () {
+        if (this.exis === false) {
+            context.fillStyle = "#000000";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.font = (this.width) + "px Arial";
+            let xx = this.x + (this.width / 2);
+            let yy = this.y + (this.height / 2);
+            context.fillText("X", xx, yy);
+            this.exis = true;
+        } else if (this.exis) {
+            this.pintar();
+            this.exis = false;
+
+        }
+
+    }
+
 
 }
-
-
 
 
 function Tablero() {
@@ -216,16 +254,16 @@ function Tablero() {
     this.sizeBox = 0;
     /*Funciones*/
     this.init = function () {
-        var index = 1;
+        let index = 1;
 
         this.sizeBox = width / numBoxes;
         sizeBoxGlobal = this.sizeBox;
         console.log("Sizebox: " + this.sizeBox);
-        var x;
-        var y;
+        let x;
+        let y;
 
 
-        for (var i = 0; i < numBoxes; i++) {
+        for (let i = 0; i < numBoxes; i++) {
             for (let j = 0; j < numBoxes; j++) {
                 x = j * this.sizeBox;
                 y = i * this.sizeBox;
@@ -245,7 +283,6 @@ function Tablero() {
             this.arrayCasillas[i].pintar();
         }
     };
-
 
 
     /*Comprovar que casilla hemos pulsado*/
@@ -273,6 +310,17 @@ function Tablero() {
             }
         }
 
+    };
+    this.checkRightClick = function (x, y) {
+        let xCasilla = Math.floor(x / this.sizeBox);
+        let yCasilla = Math.floor(y / this.sizeBox);
+        let casilla = (yCasilla * numBoxes) + xCasilla;
+
+        if (!this.arrayCasillas[casilla].noPulsabe) {
+            if (!this.arrayCasillas[casilla].pulsada) {
+                this.arrayCasillas[casilla].drawCross();
+            }
+        }
     }
 }
 

@@ -10,8 +10,6 @@ const ajustesOriginales = {
 var ajustes = {};
 
 
-
-
 document.querySelector('#guardarAjustes').addEventListener('click', function () {
     save();
 });

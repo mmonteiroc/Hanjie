@@ -8,7 +8,6 @@ document.querySelector('#closePopUp').addEventListener('click', function () {
 
 
 if (localStorage.getItem('closed')) {
-    var clos = JSON.parse(localStorage.getItem('closed'));
     document.querySelector('#advice').style = "display:none";
 }
 
