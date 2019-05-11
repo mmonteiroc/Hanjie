@@ -1,7 +1,7 @@
 const canvas = document.querySelector('#canvasGame');
 const context = canvas.getContext('2d');
 let bounding;
-let numBoxes = 7;
+let numBoxes = 8;
 const width = canvas.width;
 const height = canvas.height;
 let tablero;
@@ -9,9 +9,9 @@ let colorFondo = "#effffd";
 let ajustes = JSON.parse(localStorage.getItem('settings'));
 let colorCasilla = "#f30100";
 let indexGlobalGame;
-let arrayDibujos7 = [11, 12, 13, 19, 20, 21, 28, 36, 44, 50, 51, 52, 53, 54, 58, 59, 61, 61]; // 18 length
+let arrayDibujos7 = [11, 12, 13, 19, 20, 21, 28, 36, 44, 50, 51, 52, 53, 54, 58, 59, 61, 62]; // 18 length
 let arrayDibujosSeleccionado = arrayDibujos7;
-
+let sizeBoxGlobal;
 
 document.querySelector('#canvasGame').addEventListener('click', event => {
     update(event);
@@ -19,6 +19,10 @@ document.querySelector('#canvasGame').addEventListener('click', event => {
 
 
 init();
+
+function restart() {
+    init2();
+}
 function init() {
     setTimeout(function () {
         document.querySelector('.cargaJuego').style = "display:none";
@@ -26,13 +30,16 @@ function init() {
         bounding = canvas.getBoundingClientRect()
     }, 1500);
 
-    document.querySelector('#victoria').style = "display:none";
+    init2();
+}
 
+function init2() {
+    document.querySelector('#victoria').style = "display:none";
     if (localStorage.getItem('settings')) {
         if (ajustes.dificultad === "0") {
-            numBoxes = 8
+            numBoxes = 8;
         } else if (ajustes.dificultad === "1") {
-            numBoxes = 11
+            numBoxes = 11;
         }
 
         colorFondo = ajustes.colorFondo;
@@ -72,6 +79,8 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
     this.fondo = colorFondo;
     this.pulsada = false;
     this.noPulsabe = noPulsable;
+    this.texto = "";
+
 
     /*Funciones*/
     this.pintar = function () {
@@ -85,8 +94,90 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
         }
         context.fillRect(this.x, this.y, this.width, this.height);
         context.strokeRect(this.x, this.y, this.width, this.height);
+        if (noPulsable) {
+            if (this.x === 0 && this.y === 0) {
+            } else {
+                this.ponerNumeros();
+            }
+        }
     };
+
+    this.ponerNumeros = function () {
+        //numBoxes;
+        var string = "";
+        let primeraEncontrada = false;
+        let index = 0;
+        if (this.y === 0) {
+            // Estaremos en las casillas de arriba
+            let xCasilla = Math.floor(this.x / sizeBoxGlobal);
+            let yCasilla;
+            for (let i = 1; i < numBoxes; i++) {
+                yCasilla = i;
+                let casilla = (yCasilla * numBoxes) + xCasilla;
+
+                console.log("xCasilla: " + xCasilla);
+                console.log("yCasilla: " + yCasilla);
+                console.log("Casilla resultante: " + casilla)
+
+                if (arrayDibujosSeleccionado.indexOf(casilla) >= 0) {
+                    console.log("--- Casilla existente");
+                    index++;
+                } else {
+                    if (index !== 0) {
+                        string += index + " ";
+                    }
+                    index = 0;
+                }
+            }
+            if (index !== 0) {
+                string += " " + index;
+            }
+        } else if (this.x === 0) {
+
+            let xCasilla;
+            let yCasilla = Math.floor(this.y / sizeBoxGlobal);
+            for (let i = 1; i < numBoxes; i++) {
+                xCasilla = i;
+                let casilla = (yCasilla * numBoxes) + xCasilla;
+
+                console.log("xCasilla: " + xCasilla);
+                console.log("yCasilla: " + yCasilla);
+                console.log("Casilla resultante: " + casilla)
+
+                if (arrayDibujosSeleccionado.indexOf(casilla) >= 0) {
+                    console.log("--- Casilla existente");
+                    index++;
+                } else {
+                    if (index !== 0) {
+                        string += index + "   ";
+                    }
+                    index = 0;
+                }
+            }
+            if (index !== 0) {
+                string += " " + index;
+            }
+
+        }
+
+
+        this.pintarTexto(string);
+    };
+
+    this.pintarTexto = function (texto) {
+        context.fillStyle = "#000000";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        let xx = this.x + (this.width / 2);
+        let yy = this.y + (this.height / 2);
+
+        context.fillText(texto, xx, yy);
+    };
+
+
 }
+
+
 
 
 function Tablero() {
@@ -98,7 +189,8 @@ function Tablero() {
         var index = 1;
 
         this.sizeBox = width / numBoxes;
-        console.log(this.sizeBox);
+        sizeBoxGlobal = this.sizeBox;
+        console.log("Sizebox: " + this.sizeBox);
         var x;
         var y;
 
@@ -112,7 +204,6 @@ function Tablero() {
                     noPulsable = true;
                 }
                 this.arrayCasillas.push(new Casilla(x, y, this.sizeBox, this.sizeBox, i, j, noPulsable));
-
             }
         }
         this.pintar();
@@ -137,7 +228,6 @@ function Tablero() {
 
         if (!this.arrayCasillas[casilla].noPulsabe) {
             if (this.arrayCasillas[casilla].pulsada) {
-                console.log("Ya esta pulsada");
                 this.arrayCasillas[casilla].pulsada = false;
                 this.arrayCasillas[casilla].fondo = colorFondo;
                 indexGlobalGame--;
@@ -148,7 +238,6 @@ function Tablero() {
             }
             this.arrayCasillas[casilla].pintar();
 
-
             if (arrayDibujosSeleccionado.length === indexGlobalGame) {
                 checkEndGame();
             }
@@ -157,9 +246,6 @@ function Tablero() {
     }
 }
 
-function restart() {
-    init();
-}
 
 function checkEndGame() {
     let posicion;
