@@ -9,8 +9,7 @@ let colorFondo = "#effffd";
 let ajustes = JSON.parse(localStorage.getItem('settings'));
 let colorCasilla = "#f30100";
 let indexGlobalGame;
-let arrayDibujos7 = [11, 12, 13, 19, 20, 21, 28, 36, 44, 50, 51, 52, 53, 54, 58, 59, 61, 62]; // 18 length
-let arrayDibujosSeleccionado = arrayDibujos7;
+let arrayDibujosSeleccionado;
 let sizeBoxGlobal;
 
 document.querySelector('#canvasGame').addEventListener('click', event => {
@@ -38,12 +37,27 @@ function init2() {
     if (localStorage.getItem('settings')) {
         if (ajustes.dificultad === "0") {
             numBoxes = 8;
+            let numLevels = arrayDibujos77.length;
+            arrayDibujosSeleccionado = arrayDibujos77[0];
+
         } else if (ajustes.dificultad === "1") {
+
+
+            /*
+            * Peta al hacer un random de los niveles a elegir
+            *
+            * */
             numBoxes = 11;
+            let numLevels = arrayDibujos77.length;
+            arrayDibujosSeleccionado = arrayDibujos10[Math.floor((Math.random() * numLevels - 1))];
         }
 
         colorFondo = ajustes.colorFondo;
         colorCasilla = ajustes.colorCasilla;
+    } else {
+        numBoxes = 8;
+        let numLevels = arrayDibujos77.length;
+        arrayDibujosSeleccionado = arrayDibujos77[0];
     }
     indexGlobalGame = 0;
     tablero = new Tablero();
@@ -149,7 +163,7 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
                     index++;
                 } else {
                     if (index !== 0) {
-                        string += index + "   ";
+                        string += index + " ";
                     }
                     index = 0;
                 }
@@ -168,6 +182,7 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
         context.fillStyle = "#000000";
         context.textAlign = "center";
         context.textBaseline = "middle";
+        context.font = (this.width / 3) + "px Arial";
         let xx = this.x + (this.width / 2);
         let yy = this.y + (this.height / 2);
 
