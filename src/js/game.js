@@ -5,13 +5,15 @@ let numBoxes = 8;
 const width = canvas.width;
 const height = canvas.height;
 let tablero;
-let colorFondo = "#ceffdc";
+let colorFondo;
+let colorCasilla;
+let colorCruz;
 let ajustes = JSON.parse(localStorage.getItem('settings'));
-let colorCasilla = "#ffb3ac";
 let indexGlobalGame;
 let arrayDibujosSeleccionado;
 let sizeBoxGlobal;
 let victoria;
+
 
 canvas.addEventListener('click', event => {
     update(event);
@@ -66,7 +68,13 @@ function init2() {
 
         colorFondo = ajustes.colorFondo;
         colorCasilla = ajustes.colorCasilla;
+        colorCruz = ajustes.colorCruces;
     } else {
+
+
+        colorFondo = "#ceffdc";
+        colorCasilla = "#ffb3ac";
+        colorCruz = "#3858f3";
         numBoxes = 8;
     }
     indexGlobalGame = 0;
@@ -85,7 +93,8 @@ function chooseLevel() {
         levelSize = arrayDibujos10.length;
         arrayDibujosSeleccionado = arrayDibujos10[Math.floor(Math.random() * levelSize)]
     } else if (numBoxes === 16) {
-        arrayDibujosSeleccionado = arrayDibujos15[0]
+        levelSize = arrayDibujos15.length;
+        arrayDibujosSeleccionado = arrayDibujos15[Math.floor(Math.random() * levelSize)]
     }
 }
 
@@ -112,9 +121,6 @@ function updateRight(ev) {
         tablero.checkRightClick(x, y);
     }
 }
-
-
-
 
 
 function Casilla(x, y, W, H, fila, columna, noPulsable) {
@@ -150,6 +156,22 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
             } else {
                 this.ponerNumeros();
             }
+        }
+    };
+
+    this.drawCross = function () {
+        if (this.exis === false) {
+            context.fillStyle = colorCruz;
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.font = (this.width) + "px Arial";
+            let xx = this.x + (this.width / 2);
+            let yy = this.y + (this.height / 2);
+            context.fillText("X", xx, yy);
+            this.exis = true;
+        } else if (this.exis) {
+            this.pintar();
+            this.exis = false;
         }
     };
 
@@ -225,25 +247,6 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
 
         context.fillText(texto, xx, yy);
     };
-
-    this.drawCross = function () {
-        if (this.exis === false) {
-            context.fillStyle = "#000000";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-            context.font = (this.width) + "px Arial";
-            let xx = this.x + (this.width / 2);
-            let yy = this.y + (this.height / 2);
-            context.fillText("X", xx, yy);
-            this.exis = true;
-        } else if (this.exis) {
-            this.pintar();
-            this.exis = false;
-
-        }
-
-    }
-
 
 }
 
@@ -335,15 +338,10 @@ function checkEndGame() {
             return;
         }
     }
-    document.querySelector('#victoria').style = "display:inline";
+    document.querySelector('#victoria').style = "display:block";
+    document.querySelector('#victoria').style.marginLeft = "40%";
+    document.querySelector('#victoria').style.marginBottom = "15px";
     document.querySelector('#canviarNivel').style.display = "none";
     console.log("Has ganado");
     victoria = true;
 }
-
-
-
-
-
-
-
