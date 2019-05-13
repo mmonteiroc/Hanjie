@@ -4,7 +4,6 @@ const ajustesOriginales = {
     colorCruces: "#3858f3",
     colorFondo: "#ceffdc",
     sonido: true,
-
 };
 
 var ajustes = {};
