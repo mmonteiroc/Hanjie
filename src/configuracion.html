@@ -21,7 +21,7 @@
 </head>
 <body>
 <header>
-    <h1>Hanjie</h1>
+    <h1 id="title"><a href="https://2try.es">Hanjie</a></h1>
 
 
     <nav>
@@ -47,7 +47,11 @@
 <main>
     <section id="settings">
         <h2>Ajustes</h2>
-        <form action="#" method="get">
+        <div class="form">
+
+            <!--
+                    <form action="#" method="get">
+            -->
             <!--Ajustes del juego-->
 
 
@@ -55,7 +59,7 @@
             <select name="dificultad" id="dificultad">
                 <option value=0>Principiante</option>
                 <option value=1>Intermedio</option>
-                <option value=2>No lo conseguiras hulio</option>
+                <option value=2>Nivel prácticas pere</option>
             </select>
 
 
@@ -77,7 +81,9 @@
 
             <button id="guardarAjustes">Guardar ajustes</button>
             <button id="resetSettings">Ajustes predeterminados</button>
-        </form>
+            <!--        </form>-->
+        </div>
+
     </section>
 </main>
 
@@ -137,7 +143,9 @@
 </footer>
 
 
+<!--
 <div id="popUpSaved">La configuracion se a guardado con exito!!</div>
+-->
 
 <!-- JavaScript -->
 <script src="js/saveOptions.js"></script>

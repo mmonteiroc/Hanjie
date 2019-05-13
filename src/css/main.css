@@ -364,7 +364,7 @@ div.cargaJuego {
     border-radius: 20px;
 }
 
-#settings form {
+#settings .form {
     /*Flex padre*/
     display: flex;
     flex-direction: column;
@@ -372,7 +372,7 @@ div.cargaJuego {
     padding: 15px;
 }
 
-#settings form > input {
+#settings .form > input {
     width: 100%;
     margin-bottom: 20px;
 }
@@ -491,3 +491,8 @@ main#mainHelp section:nth-child(2) {
     transition: display 2s;
 }
 
+
+#title a {
+    text-decoration: none;
+    color: black;
+}

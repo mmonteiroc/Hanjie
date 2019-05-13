@@ -20,7 +20,9 @@ canvas.addEventListener('click', event => {
 });
 canvas.addEventListener('contextmenu', event => {
     event.preventDefault();
-    updateRight(event)
+    updateRight(event);
+
+
 });
 
 
@@ -33,6 +35,7 @@ window.addEventListener("scroll", function () {
 window.addEventListener("resize", function () {
     bounding = canvas.getBoundingClientRect()
 });
+
 
 init();
 
@@ -241,7 +244,7 @@ function Casilla(x, y, W, H, fila, columna, noPulsable) {
         context.fillStyle = "#000000";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.font = (this.width / 4) + "px Arial";
+        context.font = (this.width / 5) + "px Arial";
         let xx = this.x + (this.width / 2);
         let yy = this.y + (this.height / 2);
 
@@ -295,6 +298,7 @@ function Tablero() {
         let casilla = (yCasilla * numBoxes) + xCasilla;
         console.log("Has pulsado la casilla :" + yCasilla + " - " + xCasilla);
         console.log("Casilla: " + casilla);
+        //dibujo.push(casilla);
 
         if (!this.arrayCasillas[casilla].noPulsabe) {
             if (this.arrayCasillas[casilla].pulsada) {

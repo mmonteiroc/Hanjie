@@ -41,7 +41,7 @@ function resetSettings() {
     var aj = JSON.stringify(ajustes);
     localStorage.setItem('settings', aj);
     asignarAjustes();
-    popUp();
+    redireccionar();
 }
 
 
@@ -58,7 +58,7 @@ function save() {
     }
     var aguardar = JSON.stringify(ajustesGuardar);
     localStorage.setItem('settings', aguardar);
-    popUp();
+    redireccionar();
 }
 
 
@@ -87,18 +87,9 @@ function asignarAjustes() {
 }
 
 
-function popUp() {
-    var pop = document.querySelector('#popUpSaved');
+function redireccionar() {
+    setTimeout(function () {
 
-    pop.style.display = "block";
-    let i = 0;
-    let int = setInterval(function () {
-        pop.style.opacity = "" + i;
-        i += 0.01;
-        if (i > 1) {
-            clearInterval(int);
-        }
-    }, 40);
-
-
+        window.location = "index.html";
+    }, 300);
 }
