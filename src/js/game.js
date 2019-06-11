@@ -298,7 +298,7 @@ function Tablero() {
         let casilla = (yCasilla * numBoxes) + xCasilla;
         console.log("Has pulsado la casilla :" + yCasilla + " - " + xCasilla);
         console.log("Casilla: " + casilla);
-        //dibujo.push(casilla);
+        dibujo.push(casilla);
 
         if (!this.arrayCasillas[casilla].noPulsabe) {
             if (this.arrayCasillas[casilla].pulsada) {
